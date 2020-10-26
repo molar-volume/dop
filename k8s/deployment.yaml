@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: MusicKA 
-  namespace: dop 
+  namespace: gop 
   annotations:
     flux.weave.works/tag.flask: glob:develop-v*
     flux.weave.works/automated: 'true'
