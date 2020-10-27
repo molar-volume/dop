@@ -1,2 +1,2 @@
 # MusicKA
-This application is in the process of local deployment, using kubernetes, helm and flux.
+This application is under testing, using kubernetes, helm and flux for deployment.
