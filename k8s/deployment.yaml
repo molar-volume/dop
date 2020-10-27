@@ -3,13 +3,13 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: MusicKA
-  namespace: gop
+  namespace: gitops
   annotations:
     flux.weave.works/tag.flask: glob:develop-v*
     flux.weave.works/automated: 'true'
   labels:
     role: music
-    env: demo
+    env: test
 spec:
   replicas: 1
   selector:
@@ -29,7 +29,7 @@ spec:
           volumeMounts:
             - name: mysql-persistent-storage
               mountPath: /var/lib/mysql
-        - name: ML
+        - name: ml_service
           image: sanco/ml_flask:latest
           imagePullPolicy: IfNotPresent
           ports:
@@ -37,9 +37,9 @@ spec:
               containerPort: 5000
           env:
             - name: APP_NAME
-              value: MusicKA.K8s
+              value: MusicKA.ml_service
             - name: APP_VERSION
-              value: v1.0
+              value: v1.0.0
         - name: mongo
           image: mongo
           command:
@@ -53,17 +53,17 @@ spec:
           volumeMounts:
             - name: mongo-persistent-storage
               mountPath: /data/db
-        - name: collector
-          image: sanco/collector_spring:latest
+        - name: collector_service
+          image: sanco/collector_service:latest
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
-              containerPort: 5001
+              containerPort:` 5001
           env:
             - name: APP_NAME
-              value: MusicKA.K8s
+              value: MusicKA.collector_service
             - name: APP_VERSION
-              value: v1.0
+              value: v1.0.0
       volumes:
         - name: nginx-proxy-config
           configMap:
