@@ -6,7 +6,7 @@ import sys
 source_directory = sys.argv[1] 
 output_name = sys.argv[2]
 
-ls = os.listdir(directory)
+ls = os.listdir(source_directory)
 
 json_array = [{"name": file,
                "size": os.stat(os.path.join(source_directory, file)).st_size,
